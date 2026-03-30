@@ -6,14 +6,14 @@
 
 ## Демо
 
-Приложение развёрнуто на Netlify: **[https://storied-semifreddo-d7cfae.netlify.app](https://storied-semifreddo-d7cfae.netlify.app)**
+Приложение развёрнуто на Netlify: **[https://lambent-lily-bc4108.netlify.app/](https://lambent-lily-bc4108.netlify.app/)**
 
 ## Технологии
 
-- **TypeScript** — строгая типизация
-- **Handlebars** — шаблонизатор
-- **Vite** — сборщик
-- **CSS Custom Properties** — дизайн-токены
+- **TypeScript** 
+- **Handlebars** 
+- **Vite**
+- **CSS Custom Properties**
 
 ## Архитектура
 
