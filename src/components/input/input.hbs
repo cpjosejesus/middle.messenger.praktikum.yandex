@@ -1,0 +1,16 @@
+<div class="input-field {{#if error}}input-field--error{{/if}}">
+  {{#if label}}
+  <label class="input-field__label" for="{{name}}">{{label}}</label>
+  {{/if}}
+  <input
+    class="input-field__input"
+    id="{{name}}"
+    name="{{name}}"
+    type="{{#if type}}{{type}}{{else}}text{{/if}}"
+    placeholder="{{placeholder}}"
+    value="{{value}}"
+  />
+  {{#if error}}
+  <span class="input-field__error">{{error}}</span>
+  {{/if}}
+</div>

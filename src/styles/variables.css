@@ -1,0 +1,35 @@
+:root {
+  --color-primary: #3369f3;
+  --color-primary-hover: #2a55cc;
+  --color-danger: #ff3347;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #999999;
+  --color-bg: #f0f0f0;
+  --color-surface: #ffffff;
+  --color-border: #e5e5e5;
+  --color-input-bg: #f7f7f8;
+  --color-sidebar-bg: #ffffff;
+  --color-message-out: #eeffde;
+  --color-message-in: #ffffff;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 50%;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.06);
+
+  --font-family: Arial, Helvetica, sans-serif;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 48px;
+
+  --sidebar-width: 320px;
+  --auth-card-width: 400px;
+
+  --transition: 0.2s ease;
+}
