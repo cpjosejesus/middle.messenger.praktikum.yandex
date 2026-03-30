@@ -1,14 +1,6 @@
 import { Block } from "@/utils/block";
 import { Input } from "@/components/input/input";
 import { Button } from "@/components/button/button";
-import { Router } from "@/utils/router";
-import {
-  validateEmail,
-  validateLogin,
-  validateName,
-  validatePhone,
-  validatePassword,
-} from "@/utils/validation";
 import template from "./register.hbs";
 
 export class RegisterPage extends Block {
@@ -59,63 +51,6 @@ export class RegisterPage extends Block {
       phoneInput,
       passwordInput,
       submitButton,
-    });
-
-    this._addFormValidation(
-      emailInput,
-      loginInput,
-      firstNameInput,
-      secondNameInput,
-      phoneInput,
-      passwordInput,
-    );
-  }
-
-  private _addFormValidation(
-    emailInput: Input,
-    loginInput: Input,
-    firstNameInput: Input,
-    secondNameInput: Input,
-    phoneInput: Input,
-    passwordInput: Input,
-  ): void {
-    const form = this.element.querySelector("#registerForm");
-    if (!form) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let valid = true;
-      const fields: Array<[Input, string, (v: string) => string | null]> = [
-        [emailInput, emailInput.getValue(), validateEmail],
-        [loginInput, loginInput.getValue(), validateLogin],
-        [firstNameInput, firstNameInput.getValue(), validateName],
-        [secondNameInput, secondNameInput.getValue(), validateName],
-        [phoneInput, phoneInput.getValue(), validatePhone],
-        [passwordInput, passwordInput.getValue(), validatePassword],
-      ];
-
-      fields.forEach(([input, value, validator]) => {
-        const error = validator(value);
-        if (error) {
-          input.setError(error);
-          valid = false;
-        } else {
-          input.clearError();
-        }
-      });
-
-      if (valid) {
-        const data = {
-          email: emailInput.getValue(),
-          login: loginInput.getValue(),
-          first_name: firstNameInput.getValue(),
-          second_name: secondNameInput.getValue(),
-          phone: phoneInput.getValue(),
-          password: passwordInput.getValue(),
-        };
-        console.log("Register form data:", data);
-        Router.getInstance().go("/login");
-      }
     });
   }
 

@@ -1,13 +1,43 @@
 import { Block } from "@/utils/block";
-import { Router } from "@/utils/router";
 import template from "./messenger.hbs";
 
 const mockChats = [
-  { name: "Андрей", initials: "АН", lastMessage: "Привет! Как дела?", time: "10:30", unreadCount: 2, active: true },
-  { name: "Командный чат", initials: "КЧ", lastMessage: "Встреча завтра в 10:00", time: "09:15", unreadCount: 0 },
-  { name: "Михаил", initials: "МИ", lastMessage: "Окей, понял", time: "Вчера", unreadCount: 0 },
-  { name: "Наташа", initials: "НА", lastMessage: "Спасибо!", time: "Вт", unreadCount: 5 },
-  { name: "Дизайн команда", initials: "ДК", lastMessage: "Макеты готовы", time: "Пн", unreadCount: 0 },
+  {
+    name: "Андрей",
+    initials: "АН",
+    lastMessage: "Привет! Как дела?",
+    time: "10:30",
+    unreadCount: 2,
+    active: true,
+  },
+  {
+    name: "Командный чат",
+    initials: "КЧ",
+    lastMessage: "Встреча завтра в 10:00",
+    time: "09:15",
+    unreadCount: 0,
+  },
+  {
+    name: "Михаил",
+    initials: "МИ",
+    lastMessage: "Окей, понял",
+    time: "Вчера",
+    unreadCount: 0,
+  },
+  {
+    name: "Наташа",
+    initials: "НА",
+    lastMessage: "Спасибо!",
+    time: "Вт",
+    unreadCount: 5,
+  },
+  {
+    name: "Дизайн команда",
+    initials: "ДК",
+    lastMessage: "Макеты готовы",
+    time: "Пн",
+    unreadCount: 0,
+  },
 ];
 
 const mockActiveChat = {
@@ -15,8 +45,16 @@ const mockActiveChat = {
   initials: "АН",
   messages: [
     { text: "Привет! Как дела?", time: "10:30", isOutgoing: false },
-    { text: "Привет! Всё хорошо, спасибо. А у тебя?", time: "10:31", isOutgoing: true },
-    { text: "Тоже отлично! Ты будешь на встрече завтра?", time: "10:32", isOutgoing: false },
+    {
+      text: "Привет! Всё хорошо, спасибо. А у тебя?",
+      time: "10:31",
+      isOutgoing: true,
+    },
+    {
+      text: "Тоже отлично! Ты будешь на встрече завтра?",
+      time: "10:32",
+      isOutgoing: false,
+    },
     { text: "Да, буду. В 10:00?", time: "10:33", isOutgoing: true },
     { text: "Да, всё верно. До встречи!", time: "10:34", isOutgoing: false },
   ],
@@ -25,14 +63,6 @@ const mockActiveChat = {
 export class MessengerPage extends Block {
   constructor() {
     super({ chats: mockChats, activeChat: mockActiveChat });
-    this._addNavigation();
-  }
-
-  private _addNavigation(): void {
-    this.element.querySelector(".messenger__profile-link")?.addEventListener("click", (e) => {
-      e.preventDefault();
-      Router.getInstance().go("/settings");
-    });
   }
 
   override render(): string {
