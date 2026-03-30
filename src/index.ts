@@ -8,10 +8,12 @@ import "@/components/avatar/avatar.css";
 import "@/components/chat-item/chat-item.css";
 import "@/pages/profile/profile.css";
 import "@/pages/messenger/messenger.css";
+import "@/pages/home/home.css";
 
 import { registerHelpers } from "@/utils/helpers";
 import router from "@/utils/router";
 
+import { HomePage } from "@/pages/home/home";
 import { LoginPage } from "@/pages/login/login";
 import { RegisterPage } from "@/pages/register/register";
 import { MessengerPage } from "@/pages/messenger/messenger";
@@ -24,7 +26,8 @@ import { ServerErrorPage } from "@/pages/server-error/server-error";
 registerHelpers();
 
 router
-  .use("/", LoginPage)
+  .use("/", HomePage)
+  .use("/login", LoginPage)
   .use("/sign-up", RegisterPage)
   .use("/messenger", MessengerPage)
   .use("/settings", ProfilePage)

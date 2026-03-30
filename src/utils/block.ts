@@ -27,7 +27,7 @@ export abstract class Block<T extends Props = Props> {
     this.eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this.eventBus.on(
       Block.EVENTS.FLOW_CDU,
-      this._componentDidUpdate.bind(this),
+      this._componentDidUpdate.bind(this) as (...args: unknown[]) => void,
     );
     this.eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
@@ -80,6 +80,15 @@ export abstract class Block<T extends Props = Props> {
     const newElement = document.createElement("div");
     newElement.innerHTML = block;
 
+    Object.entries(this.props).forEach(([key, child]) => {
+      if (child instanceof Block) {
+        const stub = newElement.querySelector(`[data-id="${key}"]`);
+        if (stub) {
+          stub.replaceWith(child.getContent());
+        }
+      }
+    });
+
     this._removeEvents();
     const firstChild = newElement.firstElementChild as HTMLElement | null;
     if (firstChild) {
@@ -87,7 +96,6 @@ export abstract class Block<T extends Props = Props> {
       this._element = firstChild;
     }
 
-    this._addChildren(newElement);
     this._addEvents();
   }
 
@@ -104,20 +112,7 @@ export abstract class Block<T extends Props = Props> {
       }
     });
 
-    const html = Handlebars.compile(template)(propsWithStubs);
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-
-    Object.entries(this.props).forEach(([key, child]) => {
-      if (child instanceof Block) {
-        const stub = temp.querySelector(`[data-id="${key}"]`);
-        if (stub) {
-          stub.replaceWith(child.getContent());
-        }
-      }
-    });
-
-    return temp.innerHTML;
+    return Handlebars.compile(template)(propsWithStubs);
   }
 
   getContent(): HTMLElement {
@@ -141,17 +136,6 @@ export abstract class Block<T extends Props = Props> {
       deleteProperty: () => {
         throw new Error("No access");
       },
-    });
-  }
-
-  private _addChildren(fragment: HTMLElement): void {
-    Object.entries(this.props).forEach(([key, child]) => {
-      if (child instanceof Block) {
-        const stub = fragment.querySelector(`[data-id="${key}"]`);
-        if (stub) {
-          stub.replaceWith(child.getContent());
-        }
-      }
     });
   }
 
