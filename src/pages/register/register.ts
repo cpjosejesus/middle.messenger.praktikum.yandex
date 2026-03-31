@@ -38,6 +38,12 @@ export class RegisterPage extends Block {
       type: "password",
       placeholder: "Пароль",
     });
+    const passwordAgainInput = new Input({
+      name: "password_again",
+      label: "Пароль (ещё раз)",
+      type: "password",
+      placeholder: "Пароль",
+    });
     const submitButton = new Button({
       label: "Зарегистрироваться",
       type: "submit",
@@ -50,6 +56,7 @@ export class RegisterPage extends Block {
       secondNameInput,
       phoneInput,
       passwordInput,
+      passwordAgainInput,
       submitButton,
     });
   }

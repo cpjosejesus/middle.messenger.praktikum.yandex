@@ -7,10 +7,9 @@ export class LoginPage extends Block {
   constructor() {
     super({
       emailInput: new Input({
-        name: "email",
-        label: "Почта",
-        type: "email",
-        placeholder: "example@mail.ru",
+        name: "login",
+        label: "Логин",
+        placeholder: "ivanivanov",
       }),
       passwordInput: new Input({
         name: "password",

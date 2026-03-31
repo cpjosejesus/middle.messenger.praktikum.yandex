@@ -11,6 +11,8 @@
   --color-sidebar-bg: #ffffff;
   --color-message-out: #eeffde;
   --color-message-in: #ffffff;
+  --color-primary-light: rgba(51, 105, 243, 0.08);
+  --color-danger-light: rgba(255, 51, 71, 0.08);
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -19,6 +21,8 @@
 
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-sidebar: 2px 0 8px rgba(0, 0, 0, 0.06);
+  --shadow-header: 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-message: 0 1px 3px rgba(0, 0, 0, 0.08);
 
   --font-family: Arial, Helvetica, sans-serif;
   --font-size-sm: 12px;

@@ -4,7 +4,7 @@ import template from "./profile.hbs";
 
 export class ProfilePage extends Block {
   constructor() {
-    const avatar = new Avatar({ initials: "ИИ", size: "lg" });
+    const avatar = new Avatar({ initials: "ИИ", size: "lg", withUpload: true });
 
     super({
       avatar,

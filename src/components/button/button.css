@@ -22,7 +22,7 @@
 }
 
 .button--secondary:hover {
-  background-color: rgba(51, 105, 243, 0.08);
+  background-color: var(--color-primary-light);
 }
 
 .button--danger {
@@ -31,7 +31,7 @@
 }
 
 .button--danger:hover {
-  background-color: rgba(255, 51, 71, 0.08);
+  background-color: var(--color-danger-light);
 }
 
 .button--icon {

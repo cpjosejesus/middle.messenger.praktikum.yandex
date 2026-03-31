@@ -9,17 +9,17 @@ export class ChangePasswordPage extends Block {
     super({
       avatar: new Avatar({ initials: "ИИ", size: "lg" }),
       oldPasswordInput: new Input({
-        name: "oldPassword",
+        name: "old_password",
         label: "Старый пароль",
         type: "password",
       }),
       newPasswordInput: new Input({
-        name: "newPassword",
+        name: "new_password",
         label: "Новый пароль",
         type: "password",
       }),
       confirmPasswordInput: new Input({
-        name: "confirmPassword",
+        name: "new_password_again",
         label: "Повторите новый пароль",
         type: "password",
       }),

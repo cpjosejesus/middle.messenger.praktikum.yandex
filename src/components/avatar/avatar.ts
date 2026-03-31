@@ -6,6 +6,7 @@ interface AvatarProps {
   alt?: string;
   initials?: string;
   size?: "sm" | "md" | "lg";
+  withUpload?: boolean;
 }
 
 export class Avatar extends Block<AvatarProps> {

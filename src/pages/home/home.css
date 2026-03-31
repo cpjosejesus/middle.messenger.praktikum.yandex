@@ -67,7 +67,7 @@
 }
 
 .home__link:hover {
-  background-color: rgba(51, 105, 243, 0.08);
+  background-color: var(--color-primary-light);
   text-decoration: none;
 }
 
@@ -76,5 +76,5 @@
 }
 
 .home__link--danger:hover {
-  background-color: rgba(255, 51, 71, 0.08);
+  background-color: var(--color-danger-light);
 }

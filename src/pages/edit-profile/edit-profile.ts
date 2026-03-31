@@ -7,7 +7,7 @@ import template from "./edit-profile.hbs";
 export class EditProfilePage extends Block {
   constructor() {
     super({
-      avatar: new Avatar({ initials: "ИИ", size: "lg" }),
+      avatar: new Avatar({ initials: "ИИ", size: "lg", withUpload: true }),
       emailInput: new Input({
         name: "email",
         label: "Почта",
