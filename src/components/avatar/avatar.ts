@@ -2,6 +2,7 @@ import { Block } from "@/utils/block";
 import template from "./avatar.hbs";
 
 interface AvatarProps {
+  [key: string]: unknown;
   src?: string;
   alt?: string;
   initials?: string;

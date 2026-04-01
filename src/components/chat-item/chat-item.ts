@@ -2,6 +2,7 @@ import { Block } from "@/utils/block";
 import template from "./chat-item.hbs";
 
 interface ChatItemProps {
+  [key: string]: unknown;
   name: string;
   initials: string;
   lastMessage: string;

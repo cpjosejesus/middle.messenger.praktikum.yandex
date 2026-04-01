@@ -2,6 +2,7 @@ import { Block } from "@/utils/block";
 import template from "./input.hbs";
 
 interface InputProps {
+  [key: string]: unknown;
   name: string;
   label?: string;
   type?: string;
