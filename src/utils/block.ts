@@ -123,9 +123,10 @@ export abstract class Block<T extends Props = Props> {
     return new Proxy(props, {
       get: (target: T, prop: string) => {
         const value = target[prop as keyof T];
-        return typeof value === "function"
-          ? (value as Function).bind(target)
-          : value;
+        if (typeof value === "function") {
+          return (value as (...args: unknown[]) => unknown).bind(target);
+        }
+        return value;
       },
       set: (target: T, prop: string, value: unknown) => {
         const oldTarget = { ...target };

@@ -9,11 +9,7 @@ interface InputProps {
   placeholder?: string;
   value?: string;
   error?: string;
-  events?: {
-    blur?: EventListener;
-    focus?: EventListener;
-    input?: EventListener;
-  };
+  events?: Record<string, EventListener>;
 }
 
 export class Input extends Block<InputProps> {
@@ -31,10 +27,12 @@ export class Input extends Block<InputProps> {
   }
 
   setError(error: string): void {
-    this.setProps({ error } as Partial<InputProps>);
+    const currentValue = this.getValue();
+    this.setProps({ error, value: currentValue });
   }
 
   clearError(): void {
-    this.setProps({ error: "" } as Partial<InputProps>);
+    const currentValue = this.getValue();
+    this.setProps({ error: "", value: currentValue });
   }
 }

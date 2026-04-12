@@ -1,4 +1,5 @@
 import { Block } from "@/utils/block";
+import { validateMessage } from "@/utils/validation";
 import template from "./messenger.hbs";
 
 const mockChats = [
@@ -63,6 +64,36 @@ const mockActiveChat = {
 export class MessengerPage extends Block {
   constructor() {
     super({ chats: mockChats, activeChat: mockActiveChat });
+  }
+
+  override componentDidMount(): void {
+    const form =
+      this.element.querySelector<HTMLFormElement>("#messageForm");
+    const messageInput =
+      this.element.querySelector<HTMLInputElement>('input[name="message"]');
+
+    messageInput?.addEventListener("blur", () => {
+      const error = validateMessage(messageInput.value);
+      messageInput.classList.toggle("chat-window__input--error", error !== null);
+    });
+
+    form?.addEventListener("submit", (e: Event) => {
+      e.preventDefault();
+
+      if (!messageInput) return;
+
+      const message = messageInput.value;
+      const error = validateMessage(message);
+
+      if (error) {
+        messageInput.classList.add("chat-window__input--error");
+        return;
+      }
+
+      messageInput.classList.remove("chat-window__input--error");
+      console.log({ message });
+      messageInput.value = "";
+    });
   }
 
   override render(): string {
