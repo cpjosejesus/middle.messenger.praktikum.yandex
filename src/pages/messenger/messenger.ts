@@ -63,36 +63,35 @@ const mockActiveChat = {
 
 export class MessengerPage extends Block {
   constructor() {
-    super({ chats: mockChats, activeChat: mockActiveChat });
-  }
+    super({
+      chats: mockChats,
+      activeChat: mockActiveChat,
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
+          const form = e.target as HTMLFormElement;
+          const input = form.querySelector<HTMLInputElement>('[name="message"]');
+          if (!input) return;
 
-  override componentDidMount(): void {
-    const form =
-      this.element.querySelector<HTMLFormElement>("#messageForm");
-    const messageInput =
-      this.element.querySelector<HTMLInputElement>('input[name="message"]');
+          const message = input.value;
+          const error = validateMessage(message);
 
-    messageInput?.addEventListener("blur", () => {
-      const error = validateMessage(messageInput.value);
-      messageInput.classList.toggle("chat-window__input--error", error !== null);
-    });
+          if (error) {
+            input.classList.add("chat-window__input--error");
+            return;
+          }
 
-    form?.addEventListener("submit", (e: Event) => {
-      e.preventDefault();
-
-      if (!messageInput) return;
-
-      const message = messageInput.value;
-      const error = validateMessage(message);
-
-      if (error) {
-        messageInput.classList.add("chat-window__input--error");
-        return;
-      }
-
-      messageInput.classList.remove("chat-window__input--error");
-      console.log({ message });
-      messageInput.value = "";
+          input.classList.remove("chat-window__input--error");
+          console.log({ message });
+          input.value = "";
+        },
+        focusout: (e: Event) => {
+          const target = e.target as HTMLInputElement;
+          if (target.name !== "message") return;
+          const error = validateMessage(target.value);
+          target.classList.toggle("chat-window__input--error", error !== null);
+        },
+      },
     });
   }
 

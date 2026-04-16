@@ -1,10 +1,6 @@
 <main class="profile">
   <div class="profile__sidebar">
-    <button class="profile__back" id="backButton">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M10 3L5 8L10 13" stroke="#3369F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+    <div data-id="backButton"></div>
   </div>
   <div class="profile__content">
     <div class="profile__avatar-wrap">
@@ -39,16 +35,10 @@
       </li>
     </ul>
 
-    <ul class="profile__actions">
-      <li class="profile__actions-item profile__actions-item--link" id="editProfile">
-        Изменить данные
-      </li>
-      <li class="profile__actions-item profile__actions-item--link" id="changePassword">
-        Изменить пароль
-      </li>
-      <li class="profile__actions-item profile__actions-item--danger" id="logout">
-        Выйти
-      </li>
-    </ul>
+    <div class="profile__actions">
+      <div data-id="editProfileBtn"></div>
+      <div data-id="changePasswordBtn"></div>
+      <div data-id="logoutBtn"></div>
+    </div>
   </div>
 </main>

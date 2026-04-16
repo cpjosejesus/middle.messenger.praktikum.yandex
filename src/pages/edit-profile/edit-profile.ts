@@ -2,6 +2,7 @@ import { Block } from "@/utils/block";
 import { Input } from "@/components/input/input";
 import { Button } from "@/components/button/button";
 import { Avatar } from "@/components/avatar/avatar";
+import { BackButton } from "@/components/back-button/back-button";
 import {
   validateEmail,
   validateLogin,
@@ -12,13 +13,6 @@ import {
 import template from "./edit-profile.hbs";
 
 export class EditProfilePage extends Block {
-  private emailInput!: Input;
-  private loginInput!: Input;
-  private firstNameInput!: Input;
-  private secondNameInput!: Input;
-  private displayNameInput!: Input;
-  private phoneInput!: Input;
-
   constructor() {
     const emailInput = new Input({
       name: "email",
@@ -103,8 +97,15 @@ export class EditProfilePage extends Block {
     const saveButton = new Button({ label: "Сохранить", type: "submit" });
     const avatar = new Avatar({ initials: "ИИ", size: "lg", withUpload: true });
 
+    const backButton = new BackButton({
+      events: {
+        click: () => history.back(),
+      },
+    });
+
     super({
       avatar,
+      backButton,
       emailInput,
       loginInput,
       firstNameInput,
@@ -112,70 +113,54 @@ export class EditProfilePage extends Block {
       displayNameInput,
       phoneInput,
       saveButton,
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
+
+          const values = {
+            email: emailInput.getValue(),
+            login: loginInput.getValue(),
+            first_name: firstNameInput.getValue(),
+            second_name: secondNameInput.getValue(),
+            display_name: displayNameInput.getValue(),
+            phone: phoneInput.getValue(),
+          };
+
+          const errors = {
+            email: validateEmail(values.email),
+            login: validateLogin(values.login),
+            first_name: validateName(values.first_name),
+            second_name: validateName(values.second_name),
+            display_name: validateRequired(values.display_name),
+            phone: validatePhone(values.phone),
+          };
+
+          if (errors.email) emailInput.setError(errors.email);
+          else emailInput.clearError();
+
+          if (errors.login) loginInput.setError(errors.login);
+          else loginInput.clearError();
+
+          if (errors.first_name) firstNameInput.setError(errors.first_name);
+          else firstNameInput.clearError();
+
+          if (errors.second_name) secondNameInput.setError(errors.second_name);
+          else secondNameInput.clearError();
+
+          if (errors.display_name) displayNameInput.setError(errors.display_name);
+          else displayNameInput.clearError();
+
+          if (errors.phone) phoneInput.setError(errors.phone);
+          else phoneInput.clearError();
+
+          const hasErrors = Object.values(errors).some((err) => err !== null);
+          if (!hasErrors) {
+            console.log(values);
+          }
+        },
+      },
     });
 
-    this.emailInput = emailInput;
-    this.loginInput = loginInput;
-    this.firstNameInput = firstNameInput;
-    this.secondNameInput = secondNameInput;
-    this.displayNameInput = displayNameInput;
-    this.phoneInput = phoneInput;
-  }
-
-  override componentDidMount(): void {
-    const form =
-      this.element.querySelector<HTMLFormElement>("#editProfileForm");
-    form?.addEventListener("submit", (e: Event) => {
-      e.preventDefault();
-
-      const values = {
-        email: this.emailInput.getValue(),
-        login: this.loginInput.getValue(),
-        first_name: this.firstNameInput.getValue(),
-        second_name: this.secondNameInput.getValue(),
-        display_name: this.displayNameInput.getValue(),
-        phone: this.phoneInput.getValue(),
-      };
-
-      const errors = {
-        email: validateEmail(values.email),
-        login: validateLogin(values.login),
-        first_name: validateName(values.first_name),
-        second_name: validateName(values.second_name),
-        display_name: validateRequired(values.display_name),
-        phone: validatePhone(values.phone),
-      };
-
-      if (errors.email) this.emailInput.setError(errors.email);
-      else this.emailInput.clearError();
-
-      if (errors.login) this.loginInput.setError(errors.login);
-      else this.loginInput.clearError();
-
-      if (errors.first_name) this.firstNameInput.setError(errors.first_name);
-      else this.firstNameInput.clearError();
-
-      if (errors.second_name)
-        this.secondNameInput.setError(errors.second_name);
-      else this.secondNameInput.clearError();
-
-      if (errors.display_name)
-        this.displayNameInput.setError(errors.display_name);
-      else this.displayNameInput.clearError();
-
-      if (errors.phone) this.phoneInput.setError(errors.phone);
-      else this.phoneInput.clearError();
-
-      const hasErrors = Object.values(errors).some((e) => e !== null);
-      if (!hasErrors) {
-        console.log(values);
-      }
-    });
-
-    const backButton = this.element.querySelector<HTMLButtonElement>("#backButton");
-    backButton?.addEventListener("click", () => {
-      history.back();
-    });
   }
 
   override render(): string {

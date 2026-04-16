@@ -5,9 +5,6 @@ import { validateLogin, validatePassword } from "@/utils/validation";
 import template from "./login.hbs";
 
 export class LoginPage extends Block {
-  private loginInput!: Input;
-  private passwordInput!: Input;
-
   constructor() {
     const loginInput = new Input({
       name: "login",
@@ -38,33 +35,33 @@ export class LoginPage extends Block {
 
     const submitButton = new Button({ label: "Авторизоваться", type: "submit" });
 
-    super({ loginInput, passwordInput, submitButton });
+    super({
+      loginInput,
+      passwordInput,
+      submitButton,
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
 
-    this.loginInput = loginInput;
-    this.passwordInput = passwordInput;
-  }
+          const loginValue = loginInput.getValue();
+          const passwordValue = passwordInput.getValue();
 
-  override componentDidMount(): void {
-    const form = this.element.querySelector<HTMLFormElement>("#loginForm");
-    form?.addEventListener("submit", (e: Event) => {
-      e.preventDefault();
+          const loginError = validateLogin(loginValue);
+          const passwordError = validatePassword(passwordValue);
 
-      const loginValue = this.loginInput.getValue();
-      const passwordValue = this.passwordInput.getValue();
+          if (loginError) loginInput.setError(loginError);
+          else loginInput.clearError();
 
-      const loginError = validateLogin(loginValue);
-      const passwordError = validatePassword(passwordValue);
+          if (passwordError) passwordInput.setError(passwordError);
+          else passwordInput.clearError();
 
-      if (loginError) this.loginInput.setError(loginError);
-      else this.loginInput.clearError();
-
-      if (passwordError) this.passwordInput.setError(passwordError);
-      else this.passwordInput.clearError();
-
-      if (!loginError && !passwordError) {
-        console.log({ login: loginValue, password: passwordValue });
-      }
+          if (!loginError && !passwordError) {
+            console.log({ login: loginValue, password: passwordValue });
+          }
+        },
+      },
     });
+
   }
 
   override render(): string {
