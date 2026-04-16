@@ -1,0 +1,12 @@
+.profile__form {
+  width: 100%;
+}
+
+.profile__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+}
